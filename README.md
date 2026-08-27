@@ -76,3 +76,18 @@ plumber generates an OpenAPI spec from the annotations and serves a Swagger UI
 at `__docs__/`. It works, but the spec it advertises describes the routes as
 plumber sees them — at the root — while your browser is at `/apps/{slug}/`. Use
 it to read the shapes; send real requests with `curl` against the app's own URL.
+
+## The house style, and the console
+
+The look is the [Launchpad Example Kit](https://github.com/gopanair/launchpad-example-kit) —
+`www/`, served by `pr_static("/static", "www")` in the `@plumber` block. An API is
+still a page when somebody opens its root in a browser, and this is that page.
+
+`GET /` is a full console: the five routes, and a box that **calls them**. Every
+request it makes is a `fetch` relative to the document, which is how it keeps
+working under `/apps/{slug}/` — the browser half of the rule the server half
+never has to think about, because the proxy strips the prefix before plumber
+sees it. An API you can try in the tab you found it in is one somebody will still
+be using on Friday.
+
+MIT.
